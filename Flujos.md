@@ -276,7 +276,42 @@ PrintStream	Alto	Escribe representaciones formateadas de objetos Java en un fluj
 PrintWriter	Alto	Escribe representaciones formateadas de objetos Java en un flujo de caracteres
 
 
-### Métodos de manipulación de flujos
+### Métodos habituales y de manipulación de flujos
+
+read()
+
+write()
+
+readline()
+
+EJEMPLO DE BUFFER
+
+    import java.io.FileOutputStream;
+    import java.io.IOException;
+    
+    public class EjemploWriteConOffset {
+    public static void main(String[] args) {
+    // El mensaje original a escribir
+    String mensaje = "Este es un ejemplo de uso del método write con offset y length.";
+
+        // Convertimos el mensaje a un array de bytes
+        byte[] datos = mensaje.getBytes();
+
+        // Especificamos el archivo de salida
+        try (FileOutputStream fos = new FileOutputStream("salida.txt")) {
+            // Escribimos solo una parte del array de bytes (por ejemplo, desde el índice 5 y 10 bytes)
+            int offset = 5;
+            int length = 10;
+
+            fos.write(datos, offset, length); // Escribe los 10 bytes comenzando desde el índice 5
+            
+            System.out.println("Parte del mensaje escrita correctamente en el archivo.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
 
 Manipulación de flujos de entrada: Mark, Reset y Skip
 
