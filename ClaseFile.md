@@ -1,4 +1,4 @@
-## Operaciones con ficheros
+## Operaciones con ficheros: Clase File
 
 Clases de E/S utilizadas:
 
@@ -81,6 +81,11 @@ File[] listFiles()
 - devuelve un array de objetos File de un directorio: muy útil para listar una carpeta de archivos que se quiere procesar
 
 Ej: usar el método en una carpeta con archivos y luego trabajar sobre ellos con un forEach
+
+    // EJEMPLO DE LIST FILES
+    File f = new File("C:/Users/VSPC-BLACKFRIDAY/Desktop/AD/CodigosPostales");
+    
+    File [] archivos = f.listFiles();
 
 static File[] listRoots()
 

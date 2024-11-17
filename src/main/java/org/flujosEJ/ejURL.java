@@ -19,6 +19,7 @@ public class ejURL {
                     HttpURLConnection conexion = (HttpURLConnection) new URI(
                             "https://manuais.pages.iessanclemente.net/plantillas/dam/ad/").toURL().openConnection();
                     InputStream is = conexion.getInputStream();
+            System.out.println(conexion.getContentType());
                     String extension = conexion.getContentType().split("/")[1];
                     System.out.println(extension);
                     /*Utilizas getContentType() para obtener el tipo de contenido de la respuesta HTTP.
