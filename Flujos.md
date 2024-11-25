@@ -286,6 +286,39 @@ También encapsulan otros de alto nivel, generando una cadena de encapsulamiento
 - Se encapsula en un Buffer para mejorar el rendimiento.
 - Se encapsulta en un OIS para abrir la lectura de objetos.
 
+EJEMPLO QUE AÚNA BUFFER Y LECTURA DE FLUJO DE BYTES DESDE ARCHIVO
+
+            if (f==null || !f.exists()) {
+              return this;
+            }
+  
+            Path p = Paths.get(f.getAbsolutePath());
+  
+            // ByteArray flujo  almacena los datos en memoria como un array de bytes
+  
+            try(BufferedInputStream is = new BufferedInputStream(Files.newInputStream(p));
+            ByteArrayOutputStream os = new ByteArrayOutputStream()){
+  
+            // buffer que almacenará temporalmente los datos leidos
+  
+            byte[] buffer = new byte[1024];
+  
+            // escribe los datos almacenados en el buffer, desde inicio hasta el valor de bytes leidos
+              
+            int bytesleidos;
+               while ((bytesleidos = is.read())>0){
+                  os.write(buffer, 0, bytesleidos);
+               }
+            
+            portada=os.toByteArray();
+                 return this;
+            
+            } catch (IOException e) {
+                 throw new RuntimeException(e);
+            }
+
+
+
 TABLA DE FLUJOS con nivel y descriocion
 
 FileInputStream,	Bajo,	Lee datos de archivos como bytes

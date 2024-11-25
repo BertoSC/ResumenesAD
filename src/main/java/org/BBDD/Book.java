@@ -3,6 +3,9 @@ package org.BBDD;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Objects;
 
@@ -48,62 +51,69 @@ public class Book implements Serializable {
         return title;
     }
 
-    public void setTitle(String title) {
+    public Book setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     public Long getIdBook() {
         return idBook;
     }
 
-    public void setIdBook(Long idBook) {
+    public Book setIdBook(Long idBook) {
         this.idBook = idBook;
+        return this;
     }
 
     public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public Book setAuthor(String author) {
         this.author = author;
+        return this;
     }
 
     public int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public Book setYear(int year) {
         this.year = year;
+        return this;
     }
 
     public Boolean getAvaliable() {
         return avaliable;
     }
 
-    public void setAvaliable(Boolean avaliable) {
+    public Book setAvaliable(Boolean avaliable) {
         this.avaliable = avaliable;
+        return this;
     }
 
     public byte[] getPortada() {
         return portada;
     }
 
-    public void setPortada(byte[] portada) {
+    public Book setPortada(byte[] portada) {
         this.portada = portada;
+        return this;
     }
 
     public Date getDataPublicacion() {
         return dataPublicacion;
     }
 
-    public void setDataPublicacion(Date dataPublicacion) {
+    public Book setDataPublicacion(Date dataPublicacion) {
         this.dataPublicacion = dataPublicacion;
+        return this;
     }
 
     //setPortada(File f): asigna una portada desde un archivo.
 
-    public void setPortada(File f) {
-      /*  File temp = f;
+    public Book setPortada(File f) {
+        /*File temp = f;
         try (var in = new FileInputStream(temp)){
            byte [] img = new byte[(int)f.length()];
            int readed;
@@ -120,12 +130,34 @@ public class Book implements Serializable {
             throw new RuntimeException(e);
         }*/
 
+        if(f==null|| !f.exists()){
+            return this;
+        }
+        Path p = Paths.get(f.getAbsolutePath());
+        // ByteArray flujo  almacena los datos en memoria como un array de bytes
+        try(BufferedInputStream is = new BufferedInputStream(Files.newInputStream(p));
+            ByteArrayOutputStream os = new ByteArrayOutputStream()){
+            // buffer que almacenará temporalmente los datos leidos
+            byte[] buffer = new byte[1024];
+            // escribe los datos almacenados en el buffer, desde inicio hasta el valor de bytes leidos
+            int bytesleidos;
+            while ((bytesleidos = is.read())>0){
+                os.write(buffer, 0, bytesleidos);
+            }
+
+            portada=os.toByteArray();
+            return this;
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
-    public void setPortada(String f) {
+    public Book setPortada(String f) {
         File temp = new File(f);
         setPortada(temp);
+        return this;
 
     }
 
@@ -157,9 +189,8 @@ public class Book implements Serializable {
     @Override
     public String toString() {
         return ((title==null ||title.isEmpty())? "*" : title) +
-                ((autor==null ||autor.isEm))
-
-
+                ((author==null ||author.isEmpty())? "*" : author) +
+                ((year == 0) ? "*" : year);
 
     }
 }
