@@ -43,8 +43,9 @@ public class Book implements Serializable {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
+    public Book setIsbn(String isbn) {
         this.isbn = isbn;
+        return this;
     }
 
     public String getTitle() {
@@ -173,6 +174,58 @@ public class Book implements Serializable {
             throw new RuntimeException(e);
         }
     }
+
+    /*public Book setPortada(File f) {
+if (f == null || !f.exists())
+return this;
+Path p = Paths.get(f.getAbsolutePath());
+try (BufferedInputStream bi = new BufferedInputStream(Files.newInputStream(p));
+ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+
+this.isbn = f.getName();
+
+byte[] buffer = new byte[1024];
+int bytesLidos;
+while ((bytesLidos = bi.read(buffer)) > 0) {
+outputStream.write(buffer, 0, bytesLidos);
+}
+
+portada = outputStream.toByteArray();
+} catch (FileNotFoundException ex) {
+System.err.println("Archivo no encontrado: " + ex.getMessage());
+} catch (IOException ex) {
+System.err.println("Erro de E/S: " + ex.getMessage());
+}
+return this;
+}
+
+/**
+* Asigna la portada con Java NIO, leyendo los bytes.
+*
+* @param file
+*/
+/*public Book setPortada(String file) {
+try {
+portada = Files.readAllBytes(Paths.get(file));
+} catch (IOException ex) {
+System.err.println("Error de E/S: " + ex.getMessage());
+}
+return this;
+}
+
+public Image getImage() {
+if (portada != null) {
+try (ByteArrayInputStream bis = new ByteArrayInputStream(portada)) {
+return ImageIO.read(bis);
+} catch (IOException e) {
+}
+}
+return null;
+}*/
+
+
+
+
 
     @Override
     public boolean equals(Object o) {
