@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -50,8 +51,39 @@ public class BookDAO implements DAO<Book>{
 
     @Override
     public List<Book> getAll() {
-        return List.of();
+          String selecc = "select * from Book";
+          try (PreparedStatement ps = con.prepareStatement(selecc)){
+                ResultSet resultado= ps.executeQuery(selecc);
+                List<Book> listaLibros = new ArrayList<>();
+                while (resultado.next()){
+                    Book temp = new Book();
+                    Long identif = resultado.getLong("idBook");
+                    String is = resultado.getString("isbn");
+                    String tit = resultado.getString("titulo");
+                    String aut = resultado.getString("autor");
+                    int year = resultado.getInt("anho");
+                    boolean disp = resultado.getBoolean("disponible");
+                    byte [] port = resultado.getBytes("portada");
+                    Date date = resultado.getDate("dataPublicacion");
+                    temp.setIdBook(identif).setIsbn(is).setTitle(tit).setAuthor(aut).setYear(year).setAvaliable(disp).setPortada(port).setDataPublicacion(date);
+                    listaLibros.add(temp);
+                }
+
+                return listaLibros;
+
+            } catch (SQLException e) {
+                if (con != null) {
+                    try {
+                        System.err.print("La transacción se está revirtiendo");
+                        con.rollback();
+                    } catch (SQLException excep) {
+                        // Gestión de excepciones.
+                    }
+                }throw new RuntimeException(e);
+            }
+
     }
+
 
     @Override
     public void save(Book book) {
