@@ -17,9 +17,10 @@ public class BookDAO implements DAO<Book>{
 
     @Override
     public Book get(long id) {
-        String selecc = "select * from Book where idBook=id";
+        String selecc = "select * from Book where idBook=?";
         try (PreparedStatement ps = con.prepareStatement(selecc)){
-            ResultSet resultado= ps.getResultSet();
+            ps.setLong(1, id);
+            ResultSet resultado= ps.executeQuery(selecc);
             Book temp = new Book();
             while (resultado.next()){
                 Long identif = resultado.getLong("idBook");
@@ -35,7 +36,14 @@ public class BookDAO implements DAO<Book>{
             return temp;
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            if (con != null) {
+                try {
+                    System.err.print("La transacción se está revirtiendo");
+                    con.rollback();
+                } catch (SQLException excep) {
+                    // Gestión de excepciones.
+                }
+            }throw new RuntimeException(e);
         }
 
     }

@@ -10,6 +10,7 @@ public class ConnectionManager {
     private static final String USUARIO="";
     private static final String CONTRASEÑA="";
     private static final String URL="jdbc:h2:C:\\Users\\a23albertogc\\Desktop\\AD\\biblioteca2";
+    // PARA USAR EN CASAprivate static final String URL="jdbc:h2:D:\\VSPC-BLACKFRIDAY\\biblioteca2";
 
     private ConnectionManager(){
        getConnection();

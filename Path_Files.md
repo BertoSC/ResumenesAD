@@ -225,10 +225,6 @@ Files.move
         }
 
 
-
-
-
-
 Files.walkFileTree
 
 Este método recorre un árbol de directorios de manera recursiva.
