@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 public class ConnectionManager {
     private static ConnectionManager INSTANCE;
+    // para conectarse a BD necesitamos un objeto de tipo Connection
     private Connection con;
     private static final String USUARIO="";
     private static final String CONTRASEÑA="";
@@ -30,8 +31,10 @@ public class ConnectionManager {
 
     public void getConnection(){
         try {
+            // para establecer conexión usamos la clase DriverManager, con varias formas de ser llamada
             con = DriverManager.getConnection(URL, USUARIO, CONTRASEÑA);
             //log.info("Conexión exitosa");  revisar de qué va esto del log
+
             System.out.println("Conexión chachi");
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -42,6 +45,7 @@ public class ConnectionManager {
     public static void main(String[] args) {
         ConnectionManager cn = getINSTANCE();
     }
+
 
 
 }
