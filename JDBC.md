@@ -232,7 +232,7 @@ Savepoint puntoSalvar = con.setSavepoint(); // Creación de punto de guardado qu
 con.rollback(puntoSalvar); // con esta sentencia se revierte hasta al punto rollback indicado
 
 
-### OBJETOS GRANDES - LOB
+### OBJETOS GRANDES - LOB 
 
 BLOB > se usa para binarios
 
@@ -294,10 +294,6 @@ con el método createClob(); y luego setearlo en el prepareStatement:
     return datosClob;
     }
     }
-
-
-
-
 
 
 
