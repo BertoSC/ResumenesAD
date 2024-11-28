@@ -165,6 +165,12 @@ Se recupera el campo precio de cada fila de la tabla y se modifica con updateFlo
 
 Tras cada iteracción, se confirman los cambios con updateRow()
 
+### ACTUALIZACIONES POR LOTES
+
+...
+
+
+
 ### Prepared Statement
 
 Es la recomendada en la mayoría de los casos. Es una sentencia precompilada que se puede ejecutar repetidas veces.
@@ -203,7 +209,97 @@ A diferencia de Statement, se le pasa el String de la consulta cuando se crea.
 La sentencia utiliza ? para determinar los parámetros que se le van a enviar a la BD
 Con el set, se sitúa el orden del ? que quieres modificar y después se le añade el valor que quieres modificar
 
-EL mñetodo retiene el valor que le mandas al ? hasta que se reestablece o se use clearParameters
+EL método retiene el valor que le mandas al ? hasta que se reestablece o se use clearParameters
+
+...
+
+
+
+### CLAVES GENERADAS
+
+...
+
+### TRANSACCIONES
+
+Métodos esenciales: 
+
+con.setAutoCommit(false); // Desactivación del autocommit
+
+con.commit(); // Confirmación de los cambios de la operación
+
+Savepoint puntoSalvar = con.setSavepoint(); // Creación de punto de guardado que vuelve a un punto determinado
+
+con.rollback(puntoSalvar); // con esta sentencia se revierte hasta al punto rollback indicado
+
+
+### OBJETOS GRANDES - LOB
+
+BLOB > se usa para binarios
+
+CLOB > se usa para cadenas largas de caracteres
+
+AÑADIR OBJETOS CLOB:
+
+setClob tiene varias versiones con flujos de datos, en este caso de tipo Reader
+
+    void setClob(int parameterIndex, Reader reader);
+    void setClob(int parameterIndex, Reader reader, long length);
+    void setClob(int parameterIndex, Clob x);
+    
+    void setCharacterStream(int parameterIndex, Reader reader);
+    void setCharacterStream(int parameterIndex, Reader reader, int length);
+    void setCharacterStream(int parameterIndex, Reader reader, long length);
+
+Para crear el objeto primero se tiene que crear a partir de un objeto Connection,
+con el método createClob(); y luego setearlo en el prepareStatement: 
+    
+    public void addDescripcionProducto(String nome, String nomeArquivo) throws SQLException {
+    // Cfreación del objeto Clob:
+    Clob clobDescripcion = this.con.createClob();
+    
+        try (PreparedStatement pstmt = this.con.prepareStatement("INSERT INTO Producto VALUES(?,?)");
+          Writer clobWriter = clobDescripcion.setCharacterStream(1);){ 
+            // setCharacterStream devuelve un objeto Writer y recibe un entero que indica la posición inicial del Clob.
+            
+          String str = this.readFile(nomeArquivo, clobWriter); // Lee el conteido del archivo. 
+          System.out.println("Escribo el texto: " + clobWriter.toString());
+          
+          // Si el archivo es demasiado grande, se puede escribir en el Clob en trozos.
+          clobDescripcion.setString(1, str);
+          
+          System.out.println("Longitud del clob: " + clobDescripcion.length());
+          pstmt.setString(1, nome);
+          pstmt.setClob(2, clobDescripcion); // Se añade el Clob al PreparedStatement.
+          pstmt.executeUpdate();
+          
+        } catch (SQLException sqlex) {
+          // Gestión de excepciones.
+        } catch (Exception ex) {
+          System.out.println("Excepción no esperada: " + ex.toString());
+        }
+    }
+    
+    private String readFile(String nomeArquivo, Writer writer) throws IOException {
+    try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
+    String nextLine = "";
+    StringBuffer sb = new StringBuffer();
+    while ((nextLine = br.readLine()) != null) {
+    System.out.println("Escribiendo: " + nextLine);
+    writer.write(nextLine);
+    sb.append(nextLine);
+    }
+    // Convertir el contenido en una cadena
+    String datosClob = sb.toString();
+    // devolución de los datos.
+    return datosClob;
+    }
+    }
+
+
+
+
+
+
 
 
 ## EXCEPCIONES
