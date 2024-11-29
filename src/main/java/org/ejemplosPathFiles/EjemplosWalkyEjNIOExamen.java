@@ -13,7 +13,7 @@ public class EjemplosWalkyEjNIOExamen {
         Path p = Paths.get("C:\\Users\\VSPC-BLACKFRIDAY\\Desktop\\AD\\ApuntesyEjerciciosAD");
       /*  try {
             Stream<Path> s = Files.walk(p, Integer.MAX_VALUE);
-            s.filter(file-> file.endsWith(".java"))
+            s.filter(file-> file.toString().endsWith(".java"))
                     .forEach(System.out::println);
 
 
