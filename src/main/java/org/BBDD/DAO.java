@@ -11,6 +11,6 @@ public interface DAO <T>{
     boolean deleteById(int id);
     List<Integer> getAllIds();
     void updateLOB(T book, String f);
-    void updateLOBById(long id, String f);
+    void updateLOBById(int id, String f);
     void deleteAll();
 }

@@ -8,7 +8,7 @@ Proporciona mejor rendimiento.
 
 Similar a File > se le pasa un String que representa una ubicación de archivo (relativa o absoluta)
 
-Se construlle con Path.of()
+Se construye con Path.of()
 
     Path path1 = Path.of("fotos/batman.png");
 
@@ -263,9 +263,6 @@ que en este caso es una instancia de SimpleFileVisitor.
         }
     }
 }
-
-
-
 
 ### EXCEPCIONES
 
