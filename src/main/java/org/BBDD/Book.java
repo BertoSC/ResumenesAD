@@ -6,18 +6,19 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
 public class Book implements Serializable {
-    private Long idBook;
+    private Integer idBook;
     private String isbn;
     private String title;
     private String author;
     private int year;
     private Boolean avaliable;
     private byte[] portada;
-    private Date dataPublicacion;
+    private LocalDate dataPublicacion;
 
     public Book(){}
 
@@ -29,7 +30,7 @@ public class Book implements Serializable {
         this.avaliable=avaliable;
     }
 
-    public Book(Long idBook, String isbn, String title, String author, int year, Boolean avaliable, byte [] portada){
+    public Book(Integer idBook, String isbn, String title, String author, int year, Boolean avaliable, byte [] portada){
         this.idBook=idBook;
         this.isbn=isbn;
         this.title=title;
@@ -57,11 +58,11 @@ public class Book implements Serializable {
         return this;
     }
 
-    public Long getIdBook() {
+    public Integer getIdBook() {
         return idBook;
     }
 
-    public Book setIdBook(Long idBook) {
+    public Book setIdBook(Integer idBook) {
         this.idBook = idBook;
         return this;
     }
@@ -102,11 +103,11 @@ public class Book implements Serializable {
         return this;
     }
 
-    public Date getDataPublicacion() {
+    public LocalDate getDataPublicacion() {
         return dataPublicacion;
     }
 
-    public Book setDataPublicacion(Date dataPublicacion) {
+    public Book setDataPublicacion(LocalDate dataPublicacion) {
         this.dataPublicacion = dataPublicacion;
         return this;
     }
@@ -166,6 +167,7 @@ public class Book implements Serializable {
         try(ByteArrayInputStream flujo = new ByteArrayInputStream(portada)) {
             try {
                 Image img= ImageIO.read(flujo);
+                // if (avaliable)
                 return img;
             } catch (IOException e) {
                 throw new RuntimeException(e);
