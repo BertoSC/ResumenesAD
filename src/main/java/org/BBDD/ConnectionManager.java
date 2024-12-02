@@ -10,7 +10,8 @@ public class ConnectionManager {
     private Connection con;
     private static final String USUARIO="";
     private static final String CONTRASEÑA="";
-    private static final String URL="jdbc:h2:C:\\Users\\a23albertogc\\Desktop\\AD\\biblioteca2;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO;DATABASE_TO_UPPER=FALSE";
+    //private static final String URL="jdbc:h2:C:\\Users\\a23albertogc\\Desktop\\AD\\biblioteca2;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO;DATABASE_TO_UPPER=FALSE";
+    private static final String URL="jdbc:h2:D:\\VSPC-BLACKFRIDAY\\biblioteca2;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO;DATABASE_TO_UPPER=FALSE";
 
     private ConnectionManager(){
        getConnection();
@@ -28,7 +29,7 @@ public class ConnectionManager {
         return INSTANCE;
     }
 
-    public void getConnection(){
+    public Connection getConnection(){
         try {
             // para establecer conexión usamos la clase DriverManager, con varias formas de ser llamada
             con = DriverManager.getConnection(URL, USUARIO, CONTRASEÑA);
@@ -38,6 +39,7 @@ public class ConnectionManager {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return con;
     }
 
 }

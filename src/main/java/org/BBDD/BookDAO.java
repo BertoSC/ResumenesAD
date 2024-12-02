@@ -22,7 +22,7 @@ public class BookDAO implements DAO<Book> {
         String selecc = "select * from Book where idBook=?";
         try (PreparedStatement ps = con.prepareStatement(selecc)) {
             ps.setLong(1, id);
-            ResultSet resultado = ps.executeQuery(selecc);
+            ResultSet resultado = ps.executeQuery();
             Book temp = new Book();
             while (resultado.next()) {
                 Integer identif = resultado.getInt("idBook");
@@ -32,8 +32,8 @@ public class BookDAO implements DAO<Book> {
                 int year = resultado.getInt("anho");
                 boolean disp = resultado.getBoolean("disponible");
                 byte[] port = resultado.getBytes("portada");
-                LocalDate date = resultado.getDate("dataPublicacion").toLocalDate();
-                temp.setIdBook(identif).setIsbn(is).setTitle(tit).setAuthor(aut).setYear(year).setAvaliable(disp).setPortada(port).setDataPublicacion(date);
+                //LocalDate date = resultado.getDate("dataPublicacion").toLocalDate();.setDataPublicacion(date)
+                temp.setIdBook(identif).setIsbn(is).setTitle(tit).setAuthor(aut).setYear(year).setAvaliable(disp).setPortada(port);
             }
             return temp;
 
@@ -55,7 +55,7 @@ public class BookDAO implements DAO<Book> {
     public List<Book> getAll() {
         String selecc = "select * from Book";
         try (PreparedStatement ps = con.prepareStatement(selecc)) {
-            ResultSet resultado = ps.executeQuery(selecc);
+            ResultSet resultado = ps.executeQuery();
             List<Book> listaLibros = new ArrayList<>();
             while (resultado.next()) {
                 Book temp = new Book();
@@ -147,7 +147,7 @@ public class BookDAO implements DAO<Book> {
 
     @Override
     public List<Integer> getAllIds() {
-        String instrucc = "select idBook from Book";
+        String instrucc = "select idBook from Book ORDER BY idBook ASC";
         List<Integer> identificadores= new ArrayList<>();
         try(PreparedStatement ps = con.prepareStatement(instrucc)){
             ps.executeQuery();
