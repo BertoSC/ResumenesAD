@@ -25,19 +25,56 @@ import java.util.List;
                 p5.setLista(nombres);
                 p5.setHobbies(hobbies);
 
-                // Serializar el objeto p5
+                // PRUEBA CON SERIALIZER Y DESERIALIZER
                 Gson gson = new GsonBuilder()
                         .setPrettyPrinting()
                         .registerTypeAdapter(Persona.class, new PersonaSerializer())
+                        .registerTypeAdapter(Persona.class, new PersonaDeserializer())
                         .create();
 
-                String prueba = gson.toJson(p5); // Serializa p5 directamente
+                String prueba = gson.toJson(p5);
 
                 try (var flujo = Files.newBufferedWriter(Paths.get("personaJson.json"))) {
                     flujo.write(prueba);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+
+
+                try {
+                    String json = Files.readString(Paths.get("personaJson.json"));
+                    Persona temp = gson.fromJson(json, Persona.class);
+                    System.out.println(temp);
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                // PRUEBA CON TYPE ADAPTER
+
+                Gson gsonTA = new GsonBuilder()
+                        .setPrettyPrinting()
+                        .registerTypeAdapter(Persona.class, new PersonaTypeAdapter())
+                        .create();
+
+                String pruebaTA = gsonTA.toJson(p5);
+
+                try (var flujo = Files.newBufferedWriter(Paths.get("personaTA.json"))) {
+                    flujo.write(pruebaTA);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                try {
+                    String jsonTA = Files.readString(Paths.get("personaTA.json"));
+                    Persona tempTA = gsonTA.fromJson(jsonTA, Persona.class);
+                    System.out.println();
+                    System.out.println(tempTA);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+
             }
         }
 

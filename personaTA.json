@@ -1,0 +1,56 @@
+{
+  "nome": "paco",
+  "idade": "35",
+  "direccion": {
+    "rúa": "callejuela",
+    "cidade": "Santiago"
+  },
+  "amigos": [
+    {
+      "nome": "Luz Pozo",
+      "idade": "45",
+      "direccion": {
+        "rúa": "callejuela",
+        "cidade": "Santiago"
+      },
+      "amigos": []
+    },
+    {
+      "nome": "Rosalía",
+      "idade": "5",
+      "direccion": {
+        "rúa": "avenida",
+        "cidade": "Porto"
+      },
+      "amigos": []
+    },
+    {
+      "nome": "A tope",
+      "idade": "25",
+      "direccion": {
+        "rúa": "oxight",
+        "cidade": "Xandar"
+      },
+      "amigos": []
+    },
+    {
+      "nome": "Tú si que sabes",
+      "idade": "65",
+      "direccion": {
+        "rúa": "Viva",
+        "cidade": "Mexico"
+      },
+      "amigos": []
+    },
+    {
+      "nome": "Dalo todo",
+      "idade": "8",
+      "direccion": {
+        "rúa": "A ver de esta",
+        "cidade": "Si va"
+      },
+      "amigos": []
+    }
+  ],
+  "aficions": "Nadar-viciar-fumar-comer-mandanga-el delicioso"
+}

@@ -1,6 +1,7 @@
 package org.json;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Persona {
@@ -58,14 +59,14 @@ public class Persona {
             this.hobbies = hobbies;
         }
 
-        @Override
-        public String toString() {
-            return "Persona{" +
-                    "nombre='" + nombre + '\'' +
-                    ", edad='" + edad + '\'' +
-                    ", direccion=" + direccion +
-                    ", lista=" + amigos +
-                    '}';
-        }
-
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "nombre='" + nombre + '\'' +
+                ", edad='" + edad + '\'' +
+                ", direccion=" + direccion +
+                ", amigos=" + amigos +
+                ", hobbies=" + Arrays.toString(hobbies) +
+                '}';
+    }
 }
