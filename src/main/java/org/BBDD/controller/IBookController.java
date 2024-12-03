@@ -10,7 +10,7 @@ public interface IBookController {
 
     public void getBook(int id);
 
-    public void updateBook(String title, String author, String isbn, int year, boolean available, byte[] cover);
+    public void updateBook(int id, String title, String author, String isbn, int year, boolean available, byte[] cover);
 
     public boolean deleteBook(int id);
 

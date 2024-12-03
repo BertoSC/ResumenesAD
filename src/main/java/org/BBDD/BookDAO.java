@@ -121,6 +121,31 @@ public class BookDAO implements DAO<Book> {
 
     @Override
     public void update(Book book) {
+        String instrucc = "UPDATE Book SET isbn = ?, titulo = ?, autor = ?, anho = ?, disponible = ?, portada = ? WHERE id = ?";
+        try(PreparedStatement ps = con.prepareStatement(instrucc)){
+            con.setAutoCommit(false);
+            ps.setString(1, book.getIsbn());
+            ps.setString(2, book.getTitle());
+            ps.setString(3, book.getAuthor());
+            ps.setInt(4, book.getYear());
+            ps.setBoolean(5, book.getAvaliable());
+           // Blob img = con.createBlob();
+            byte [] b = book.getPortada();
+            ps.setBytes(6, b);
+           // ps.setBlob(6, img);
+            ps.setInt(7, book.getIdBook());
+            ps.executeUpdate();
+            con.commit();
+
+        } catch (SQLException e) {
+            try {
+                con.rollback();
+                System.err.println("ERROR EN LA OPERACIÓN: Ejecutando rollback");
+            } catch (SQLException ex) {
+                System.out.println("ERROR EN EL ROLLBACK");
+            }
+            System.out.println("ERROR DE EN LA OPERACIÓN");;
+        }
 
     }
 

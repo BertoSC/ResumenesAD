@@ -10,8 +10,8 @@ public class ConnectionManager {
     private Connection con;
     private static final String USUARIO="";
     private static final String CONTRASEÑA="";
-    //private static final String URL="jdbc:h2:C:\\Users\\a23albertogc\\Desktop\\AD\\biblioteca2;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO;DATABASE_TO_UPPER=FALSE";
-    private static final String URL="jdbc:h2:D:\\VSPC-BLACKFRIDAY\\biblioteca2;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO;DATABASE_TO_UPPER=FALSE";
+    private static final String URL="jdbc:h2:C:\\Users\\a23albertogc\\Desktop\\AD\\biblioteca2;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO;DATABASE_TO_UPPER=FALSE";
+    //private static final String URL="jdbc:h2:D:\\VSPC-BLACKFRIDAY\\biblioteca2;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO;DATABASE_TO_UPPER=FALSE";
 
     private ConnectionManager(){
        getConnection();

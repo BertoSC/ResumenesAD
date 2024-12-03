@@ -7,13 +7,14 @@ import org.BBDD.vista.IBookView;
 
 import java.util.List;
 
-public class BookController implements IBookController{
+public class BookController implements IBookController {
     DAO <Book> bookDAO;
     IBookView bookView;
 
-    public BookController (DAO<Book> dao){
+    public BookController (DAO<Book> dao) {
         this.bookDAO=dao;
     }
+
 
     @Override
     public boolean createBook(String title, String author, String isbn, int year, boolean available, byte[] cover) {
@@ -30,17 +31,18 @@ public class BookController implements IBookController{
         bookView.setAvailable(actual.getAvaliable());
         bookView.setCover(actual.getPortada());
         bookView.setID(actual.getIdBook());
-
     }
 
     @Override
-    public void updateBook(String title, String author, String isbn, int year, boolean available, byte[] cover) {
+    public void updateBook(int id, String title, String author, String isbn, int year, boolean available, byte[] cover) {
+         Book newB = new Book(id, title, author, isbn, year, available, cover);
+         bookDAO.update(newB);
 
     }
 
     @Override
     public boolean deleteBook(int id) {
-        return false;
+        return bookDAO.deleteById(id);
     }
 
     @Override

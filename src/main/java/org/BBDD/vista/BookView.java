@@ -96,6 +96,46 @@ public class BookView extends JFrame implements IBookView {
             }
         });
 
+
+        bntUpdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String title = tfTitle.getText();
+                    String author = tfAuthor.getText();
+                    int year = Integer.parseInt(tfYear.getText());
+                    String isbn = tfISBN.getText();
+                    boolean available = jcbAvailable.isSelected();
+                    int id = Integer.parseInt(lblID.getText());
+                    //byte [] port = portada.getIcon();
+                    //bookControler.updateBook(id, title, author, year, isbn, available, portada);
+                    JOptionPane.showMessageDialog(BookView.this, "Libro actualizado con éxito.");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(BookView.this, "Error actualizando el libro: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        bntDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int id = Integer.parseInt(lblID.getText());
+                    int confirm = JOptionPane.showConfirmDialog(BookView.this, "¿Estás seguro de que deseas eliminar este libro?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        bookControler.deleteBook(id);
+                        JOptionPane.showMessageDialog(BookView.this, "Libro eliminado con éxito.");
+                        bookControler.getBook(bookControler.getFirstId());
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(BookView.this, "Error eliminando el libro: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+
+
+
         panelInferior.add(lblID);
 
         getContentPane().add(panelInferior, BorderLayout.PAGE_END);
@@ -198,6 +238,10 @@ public class BookView extends JFrame implements IBookView {
         setLocationRelativeTo(null);
     }
 
+
+    public JLabel getLblID() {
+        return lblID;
+    }
 
     @Override
     public void setBookTitle(String title) {
