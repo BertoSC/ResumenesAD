@@ -10,9 +10,12 @@ import java.util.List;
 public class BookController implements IBookController {
     DAO <Book> bookDAO;
     IBookView bookView;
+    List <Integer> ids;
+    Integer currentId;
 
     public BookController (DAO<Book> dao) {
         this.bookDAO=dao;
+        ids=bookDAO.getAllIds();
     }
 
 
@@ -36,8 +39,8 @@ public class BookController implements IBookController {
     @Override
     public void updateBook(int id, String title, String author, String isbn, int year, boolean available, byte[] cover) {
          Book newB = new Book(id, title, author, isbn, year, available, cover);
-         bookDAO.update(newB);
 
+         bookDAO.update(newB);
     }
 
     @Override

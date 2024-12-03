@@ -1,0 +1,38 @@
+{
+  "name": "paco",
+  "age": "35",
+  "adress": "callejuela,Santiago",
+  "amigos": [
+    {
+      "name": "Luz Pozo",
+      "age": "45",
+      "adress": "callejuela,Santiago",
+      "amigos": []
+    },
+    {
+      "name": "Rosalía",
+      "age": "5",
+      "adress": "avenida,Porto",
+      "amigos": []
+    },
+    {
+      "name": "A tope",
+      "age": "25",
+      "adress": "oxight,Xandar",
+      "amigos": []
+    },
+    {
+      "name": "Tú si que sabes",
+      "age": "65",
+      "adress": "Viva,Mexico",
+      "amigos": []
+    },
+    {
+      "name": "Dalo todo",
+      "age": "8",
+      "adress": "A ver de esta,Si va",
+      "amigos": []
+    }
+  ],
+  "Hobbies": "Nadar-viciar-fumar-comer-mandanga-el delicioso"
+}

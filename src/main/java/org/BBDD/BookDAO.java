@@ -121,7 +121,7 @@ public class BookDAO implements DAO<Book> {
 
     @Override
     public void update(Book book) {
-        String instrucc = "UPDATE Book SET isbn = ?, titulo = ?, autor = ?, anho = ?, disponible = ?, portada = ? WHERE id = ?";
+        String instrucc = "UPDATE Book SET isbn = ?, titulo = ?, autor = ?, anho = ?, disponible = ?, portada = ? WHERE idBook = ?";
         try(PreparedStatement ps = con.prepareStatement(instrucc)){
             con.setAutoCommit(false);
             ps.setString(1, book.getIsbn());
@@ -141,6 +141,10 @@ public class BookDAO implements DAO<Book> {
             try {
                 con.rollback();
                 System.err.println("ERROR EN LA OPERACIÓN: Ejecutando rollback");
+                System.err.println("SQLState: " + e.getSQLState());
+                System.err.println("Error Code: " + e.getErrorCode());
+                System.err.println("Message: " + e.getMessage());
+                e.printStackTrace();
             } catch (SQLException ex) {
                 System.out.println("ERROR EN EL ROLLBACK");
             }

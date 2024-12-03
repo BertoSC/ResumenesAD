@@ -10,9 +10,20 @@ import java.sql.SQLException;
 public class AppBiblioteca {
     public static void main(String[] args) {
         Connection con = ConnectionManager.getINSTANCE().getConnection();
-        BookDAO bd = new BookDAO(con);
-        BookController contr = new BookController(bd);
-        new BookView(contr).setVisible(true);
+
+        // Inicializar DAO
+        BookDAO bookDAO = new BookDAO(con);
+
+        // Inicializar vista
+        BookView bookView = new BookView();
+
+        // Inicializar controlador
+        BookController bookController = new BookController(bookDAO);
+
+        // Vincular vista y controlador
+        bookController.setView(bookView);
+        bookView.setController(bookController);
+        bookView.setVisible(true);
 
 
         /* PRUEBA DE INSERCIÓN DE LIBRO - ÉXITO
