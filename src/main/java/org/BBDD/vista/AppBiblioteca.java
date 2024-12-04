@@ -11,7 +11,7 @@ public class AppBiblioteca {
     public static void main(String[] args) {
         Connection con = ConnectionManager.getINSTANCE().getConnection();
 
-        // Inicializar DAO
+
         BookDAO bookDAO = new BookDAO(con);
 
         // Inicializar vista
