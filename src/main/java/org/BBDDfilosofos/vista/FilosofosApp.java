@@ -38,7 +38,7 @@ public class FilosofosApp {
         // Frame principal
         frame = new JFrame("Filosofos");
         frame.setBounds(100, 100, 400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.getContentPane().setLayout(new GridLayout(8, 2));
 
         // Campos para mostrar los datos
