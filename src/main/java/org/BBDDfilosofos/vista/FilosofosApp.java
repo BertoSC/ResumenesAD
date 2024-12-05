@@ -4,7 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import org.BBDDfilosofos.ConManager;
 import org.BBDDfilosofos.controlador.FilosofoController;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -21,8 +26,10 @@ public class FilosofosApp {
     JTextField dataNacementoField;
     FilosofoController controller;
     Boolean select=false;
+    Connection con;
 
-    public FilosofosApp(Connection con) throws SQLException {
+    public FilosofosApp() throws SQLException {
+        con= ConManager.getINSTANCE().getConection();
         controller = new FilosofoController(con, this);
         initialize();
     }
@@ -80,6 +87,23 @@ public class FilosofosApp {
             }
         });
         frame.getContentPane().add(btnAnterior);
+
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Llamamos a nuestro método para cerrar la conexión antes de salir
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                System.exit(0); // Cierra la aplicación
+            }
+        });
+
+        frame.setVisible(true);
+
+
 
         JButton btnSiguiente = new JButton("Siguiente");
         btnSiguiente.addActionListener(new ActionListener() {
