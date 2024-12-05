@@ -4,10 +4,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConManager {
-    //private final static String URL="jdbc:h2:C:\\Users\\a23albertogc\\Desktop\\AD\\filosofos\\filosofosv2.3"
-    //+"DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO;DATABASE_TO_UPPER=FALSE";
+    private final static String URL="jdbc:h2:C:\\Users\\a23albertogc\\Desktop\\AD\\filosofos\\filosofosv2.3;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO;DATABASE_TO_UPPER=FALSE";
 
-    private final static String URL = "jdbc:h2:C:\\Users\\VSPC-BLACKFRIDAY\\Desktop\\AD\\filosofos\\filosofosv2.3;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO;DATABASE_TO_UPPER=FALSE";
+    //private final static String URL = "jdbc:h2:C:\\Users\\VSPC-BLACKFRIDAY\\Desktop\\AD\\filosofos\\filosofosv2.3;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO;DATABASE_TO_UPPER=FALSE";
 
     private final static String USER="";
     private final static String PASSWORD="";

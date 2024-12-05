@@ -6,6 +6,7 @@ import org.BBDDfilosofos.modelo.FilosofoDAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class FilosofoController {
     private ResultSet rs;
@@ -48,6 +49,12 @@ public class FilosofoController {
             dataNacemento = rs.getDate("dataNacemento");
         }
     }
+
+    public void actualizarDatos(String nom, String ape, int ed, String fecha, Boolean select) throws SQLException {
+        filDao.update(rs, nom, ape, ed, fecha, select);
+    }
+
+
 
     public int getId() {
         return id;

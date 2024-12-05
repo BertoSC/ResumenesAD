@@ -7,6 +7,10 @@ import java.awt.event.ActionListener;
 import org.BBDDfilosofos.controlador.FilosofoController;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class FilosofosApp {
     private JFrame frame;
@@ -27,7 +31,7 @@ public class FilosofosApp {
         frame = new JFrame("Filosofos");
         frame.setBounds(100, 100, 400, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new GridLayout(6, 2));
+        frame.getContentPane().setLayout(new GridLayout(8, 2));
 
         // Campos para mostrar los datos
         JLabel lblId = new JLabel("ID:");
@@ -38,25 +42,25 @@ public class FilosofosApp {
 
         JLabel lblNome = new JLabel("Nome:");
         nomeField = new JTextField();
-        nomeField.setEditable(false);
+        nomeField.setEditable(true);
         frame.getContentPane().add(lblNome);
         frame.getContentPane().add(nomeField);
 
         JLabel lblApelidos = new JLabel("Apelidos:");
         apelidosField = new JTextField();
-        apelidosField.setEditable(false);
+        apelidosField.setEditable(true);
         frame.getContentPane().add(lblApelidos);
         frame.getContentPane().add(apelidosField);
 
         JLabel lblIdade = new JLabel("Idade:");
         idadeField = new JTextField();
-        idadeField.setEditable(false);
+        idadeField.setEditable(true);
         frame.getContentPane().add(lblIdade);
         frame.getContentPane().add(idadeField);
 
         JLabel lblDataNacemento = new JLabel("Data Nacemento:");
         dataNacementoField = new JTextField();
-        dataNacementoField.setEditable(false);
+        dataNacementoField.setEditable(true);
         frame.getContentPane().add(lblDataNacemento);
         frame.getContentPane().add(dataNacementoField);
 
@@ -91,6 +95,56 @@ public class FilosofosApp {
         });
         frame.getContentPane().add(btnSiguiente);
 
+        // Nuevos botones
+        JButton btnActualizar = new JButton("Actualizar");
+        btnActualizar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String nome= nomeField.getText();
+                String apell=apelidosField.getText();
+                int ed= Integer.parseInt(idadeField.getText());
+                String fecha= dataNacementoField.getText();
+                Boolean select=true;
+                try {
+                    controller.actualizarDatos(nome, apell,ed,fecha,select);
+
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                System.out.println("Botón Actualizar presionado");
+            }
+        });
+        frame.getContentPane().add(btnActualizar);
+
+        JButton btnBorrar = new JButton("Borrar");
+        btnBorrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Aquí iría la lógica para borrar el registro
+                System.out.println("Botón Borrar presionado");
+            }
+        });
+        frame.getContentPane().add(btnBorrar);
+
+        JButton btnAñadir = new JButton("Añadir");
+        btnAñadir.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String nome= nomeField.getText();
+                String apell=apelidosField.getText();
+                int ed= Integer.parseInt(idadeField.getText());
+                String fecha= dataNacementoField.getText();
+                Boolean select=false;
+                try {
+                    controller.actualizarDatos(nome, apell,ed,fecha,select);
+
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                System.out.println("Botón Añadir presionado");
+            }
+        });
+        frame.getContentPane().add(btnAñadir);
+
         // Inicializar con los primeros datos
         try {
             controller.setDatosActuales();
@@ -101,7 +155,7 @@ public class FilosofosApp {
     }
 
     private void updateFields() throws SQLException {
-        // Actualiza los campos de la interfaz con los datos del ResultSet
+
         idField.setText(String.valueOf(controller.getId()));
         nomeField.setText(controller.getNome());
         apelidosField.setText(controller.getApelidos());
