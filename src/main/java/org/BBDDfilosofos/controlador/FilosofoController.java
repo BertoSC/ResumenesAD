@@ -2,6 +2,7 @@ package org.BBDDfilosofos.controlador;
 
 import org.BBDD.Book;
 import org.BBDDfilosofos.modelo.FilosofoDAO;
+import org.BBDDfilosofos.vista.FilosofosApp;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,6 +12,7 @@ import java.util.Date;
 public class FilosofoController {
     private ResultSet rs;
     private FilosofoDAO filDao;
+    private FilosofosApp app;
     private int index = -1;
 
     private int id;
@@ -19,9 +21,10 @@ public class FilosofoController {
     private int idade;
     private java.sql.Date dataNacemento;
 
-    public FilosofoController(Connection con) throws SQLException {
+    public FilosofoController(Connection con, FilosofosApp app) throws SQLException {
         filDao = new FilosofoDAO(con);
         rs = filDao.getCursor();
+        this.app=app;
     }
 
     public Boolean previo() throws SQLException {
@@ -52,9 +55,8 @@ public class FilosofoController {
 
     public void actualizarDatos(String nom, String ape, int ed, String fecha, Boolean select) throws SQLException {
         filDao.update(rs, nom, ape, ed, fecha, select);
+        rs= filDao.getCursor();
     }
-
-
 
     public int getId() {
         return id;

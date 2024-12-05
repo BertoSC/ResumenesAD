@@ -27,18 +27,32 @@ public class FilosofoDAO implements DAO<Filosofo>{
 
     public void update(ResultSet rs, String nom, String ape, int ed, String fecha, Boolean select) throws SQLException {
         if (select) {
+            System.out.println("Valores en el ResultSet antes de insertar:");
+            System.out.println("idFilosofo: " + rs.getObject("idFilosofo"));
+            System.out.println("nome: " + rs.getString("nome"));
+            System.out.println("apelidos: " + rs.getString("apelidos"));
+            System.out.println("idade: " + rs.getInt("idade"));
+            System.out.println("dataNacemento: " + rs.getDate("dataNacemento"));
+
             rs.updateString("nome", nom);
             rs.updateString("apelidos", ape);
             rs.updateInt("idade", ed);
             rs.updateDate("dataNacemento", java.sql.Date.valueOf(fecha));
             rs.updateRow();
         } else {
+            System.out.println("Valores en el ResultSet antes de insertar:");
+            System.out.println(nom);
+            System.out.println(ape);
+            System.out.println(ed);
+            System.out.println(fecha);
+
             rs.moveToInsertRow();
             rs.updateString("nome", nom);
             rs.updateString("apelidos", ape);
             rs.updateInt("idade", ed);
             rs.updateDate("dataNacemento", java.sql.Date.valueOf(fecha));
             rs.insertRow();
+            rs.moveToCurrentRow();
 
 
         }
@@ -52,8 +66,8 @@ public class FilosofoDAO implements DAO<Filosofo>{
 
     @Override
     public ResultSet getCursor() throws SQLException {
-        String consulta = "select * from Filosofo order by idFilosofo";
-        Statement st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        String consulta = "SELECT * FROM Filosofo";
+        Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         ResultSet rs = st.executeQuery(consulta);
 
         if (rs.next()) {

@@ -14,15 +14,16 @@ import java.util.Date;
 
 public class FilosofosApp {
     private JFrame frame;
-    private JTextField idField;
-    private JTextField nomeField;
-    private JTextField apelidosField;
-    private JTextField idadeField;
-    private JTextField dataNacementoField;
-    private FilosofoController controller;
+    JTextField idField;
+    JTextField nomeField;
+    JTextField apelidosField;
+    JTextField idadeField;
+    JTextField dataNacementoField;
+    FilosofoController controller;
+    Boolean select=false;
 
     public FilosofosApp(Connection con) throws SQLException {
-        controller = new FilosofoController(con);
+        controller = new FilosofoController(con, this);
         initialize();
     }
 
@@ -36,7 +37,7 @@ public class FilosofosApp {
         // Campos para mostrar los datos
         JLabel lblId = new JLabel("ID:");
         idField = new JTextField();
-        idField.setEditable(false);
+        idField.setEditable(true);
         frame.getContentPane().add(lblId);
         frame.getContentPane().add(idField);
 
@@ -103,7 +104,7 @@ public class FilosofosApp {
                 String apell=apelidosField.getText();
                 int ed= Integer.parseInt(idadeField.getText());
                 String fecha= dataNacementoField.getText();
-                Boolean select=true;
+                select=true;
                 try {
                     controller.actualizarDatos(nome, apell,ed,fecha,select);
 
@@ -119,7 +120,7 @@ public class FilosofosApp {
         JButton btnBorrar = new JButton("Borrar");
         btnBorrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Aquí iría la lógica para borrar el registro
+                clear();
                 System.out.println("Botón Borrar presionado");
             }
         });
@@ -132,7 +133,7 @@ public class FilosofosApp {
                 String apell=apelidosField.getText();
                 int ed= Integer.parseInt(idadeField.getText());
                 String fecha= dataNacementoField.getText();
-                Boolean select=false;
+                select=false;
                 try {
                     controller.actualizarDatos(nome, apell,ed,fecha,select);
 
@@ -141,6 +142,7 @@ public class FilosofosApp {
                 }
 
                 System.out.println("Botón Añadir presionado");
+
             }
         });
         frame.getContentPane().add(btnAñadir);
@@ -152,6 +154,15 @@ public class FilosofosApp {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void clear(){
+        idField.setText("");
+        nomeField.setText("");
+        apelidosField.setText("");
+        idadeField.setText("");
+        dataNacementoField.setText("");
+
     }
 
     private void updateFields() throws SQLException {
