@@ -25,6 +25,9 @@ public class PersonaDeserializer implements JsonDeserializer<Persona> {
             listaP = null;
         }
 
+
+
+
         String[] hobbies = null;
         if (jo.get("Hobbies")!=null) {
             hobbies = jo.get("Hobbies").getAsString().split("-");
