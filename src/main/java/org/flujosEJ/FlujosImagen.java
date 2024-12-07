@@ -63,9 +63,6 @@ public class FlujosImagen {
             Image image = ImageIO.read(byteArrayInputStream);
 
 
-
-
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (URISyntaxException e) {
