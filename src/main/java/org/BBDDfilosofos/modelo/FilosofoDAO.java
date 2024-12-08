@@ -22,8 +22,11 @@ public class FilosofoDAO implements DAO<Filosofo>{
 
     @Override
     public List<Filosofo> getAll() {
+
         return null;
     }
+
+
 
     public void update(ResultSet rs, String nom, String ape, int ed, String fecha, Boolean select) throws SQLException {
         if (select) {
