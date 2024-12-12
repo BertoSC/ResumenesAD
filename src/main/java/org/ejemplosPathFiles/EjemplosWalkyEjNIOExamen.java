@@ -1,16 +1,14 @@
 package org.ejemplosPathFiles;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class EjemplosWalkyEjNIOExamen {
     public static void main(String[] args) {
-        Path p = Paths.get("C:\\Users\\VSPC-BLACKFRIDAY\\Desktop\\AD\\ApuntesyEjerciciosAD");
+        Path p = Paths.get("C:\\Users\\VSPC-BLACKFRIDAY\\Desktop");
       /*  try {
             Stream<Path> s = Files.walk(p, Integer.MAX_VALUE);
             s.filter(file-> file.toString().endsWith(".java"))
@@ -41,6 +39,8 @@ public class EjemplosWalkyEjNIOExamen {
             System.out.println();
             List<Path> lista= findByFileExtension(p, ".java");
             for (Path ruta:lista){
+                Path prueba = Paths.get("C:\\Users\\VSPC-BLACKFRIDAY\\Desktop\\prueba\\");
+                Files.copy(ruta, prueba.resolve(ruta.getFileName()), StandardCopyOption.REPLACE_EXISTING);
                 System.out.println(ruta.getFileName());
             }
         } catch (Exception ex){
@@ -54,7 +54,7 @@ public class EjemplosWalkyEjNIOExamen {
         if (Files.isDirectory(pat)){
             try (Stream<Path> s = Files.walk(pat)){
                 return s.filter(file->Files.isRegularFile(file))
-                        .filter(file->file.toString().endsWith(ext))
+                        .filter(file->file.getFileName().toString().endsWith(ext))
                  .collect(Collectors.toList());
             } catch (IOException e) {
                 throw new RuntimeException(e);
