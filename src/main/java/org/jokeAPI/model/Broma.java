@@ -134,7 +134,8 @@ public class Broma implements Serializable {
             String [] partes= joke.split("separaaqui");
             return "Categoria: " + categoria + System.lineSeparator() + System.lineSeparator()+
                     partes[0] + System.lineSeparator() +
-                    partes[1] + System.lineSeparator();
+                    partes[1] + System.lineSeparator() +
+                    flagList;
         }
     }
 }

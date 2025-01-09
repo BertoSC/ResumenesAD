@@ -26,4 +26,10 @@ public enum TipoFlag {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return "TipoFlag{" +
+                "tipoFlag='" + tipoFlag + '\'' +
+                '}';
+    }
 }

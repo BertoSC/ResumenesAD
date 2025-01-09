@@ -15,6 +15,19 @@
     </properties>
 
     <dependencies>
+        <!-- dependencias jakarta e hibernate, versiones actuales funcionales, las siguientes están en beta -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency><!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.6.4.Final</version>
+        </dependency>
+
+        <!-- dependencias pstgres, sqlite, h2 -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -32,7 +45,7 @@
             <artifactId>h2</artifactId>
             <version>2.3.232</version>
         </dependency>
-
+        <!-- dependencia gson-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>

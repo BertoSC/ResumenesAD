@@ -1,0 +1,18 @@
+{
+  "error": false,
+  "category": "Pun",
+  "type": "twopart",
+  "setup": "What happens when you don't obey the KGB?",
+  "delivery": "You get Putin jail.",
+  "flags": {
+    "nsfw": false,
+    "religious": false,
+    "political": true,
+    "racist": false,
+    "sexist": false,
+    "explicit": false
+  },
+  "id": 70,
+  "safe": false,
+  "lang": "en"
+}
