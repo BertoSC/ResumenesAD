@@ -15,6 +15,11 @@ public class Pelicula implements Serializable {
     private String titulo;
     private short ano;
 
+    // relación entre entidades
+    @ManyToOne
+    @JoinColumn(name ="idDirector")
+    Director director;
+
     public Pelicula(Long idPelicula, short ano, String titulo) {
         this.idPelicula = idPelicula;
         this.ano = ano;
